@@ -1,0 +1,203 @@
+import React from "react";
+import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, Img, interpolate } from "remotion";
+import { TextAnimation } from "../../library/components/text/TextAnimation";
+import { ShapeAnimation } from "../../library/components/effects/ShapeAnimation";
+
+interface FeatureSceneProps {
+  iconUrl: string;
+  title: string;
+  description: string;
+  index: number;
+}
+
+export const FeatureScene: React.FC<FeatureSceneProps> = ({ iconUrl, title, description, index }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  // Icon entrance
+  const iconScale = spring({ frame, fps, config: { damping: 10, stiffness: 90 }, delay: 5 });
+  const iconOpacity = interpolate(frame, [5, 15], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+
+  // Decorative ring
+  const ringScale = spring({ frame, fps, config: { damping: 8, stiffness: 60 }, delay: 3 });
+  const ringOpacity = interpolate(frame, [3, 20], [0, 0.15], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+
+  // Accent line
+  const lineScale = spring({ frame, fps, config: { damping: 18, stiffness: 140 }, delay: 20 });
+
+  // Feature number
+  const numOpacity = interpolate(frame, [0, 15], [0, 0.08], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const numScale = spring({ frame, fps, config: { damping: 20, stiffness: 60 }, delay: 0 });
+
+  // Floating accent dots
+  const time = frame / fps;
+  const dots = Array.from({ length: 4 }, (_, i) => ({
+    x: 65 + i * 8 + Math.sin(time * 0.6 + i) * 5,
+    y: 25 + i * 15 + Math.cos(time * 0.5 + i * 1.5) * 8,
+    opacity: interpolate(frame, [15 + i * 4, 30 + i * 4], [0, 0.2 + Math.sin(time + i) * 0.1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    }),
+    size: 4 + i,
+  }));
+
+  return (
+    <AbsoluteFill style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+      {/* Large background number */}
+      <div
+        style={{
+          position: "absolute",
+          right: "8%",
+          top: "10%",
+          fontSize: 280,
+          fontWeight: 900,
+          color: "#3ECF8E",
+          opacity: numOpacity,
+          transform: `scale(${numScale})`,
+          lineHeight: 1,
+        }}
+      >
+        0{index}
+      </div>
+
+      {/* Floating accent dots */}
+      {dots.map((d, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            left: `${d.x}%`,
+            top: `${d.y}%`,
+            width: d.size,
+            height: d.size,
+            borderRadius: "50%",
+            backgroundColor: "#3ECF8E",
+            opacity: d.opacity,
+          }}
+        />
+      ))}
+
+      {/* Main content - left aligned */}
+      <div
+        style={{
+          position: "absolute",
+          left: "10%",
+          top: "50%",
+          transform: "translateY(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 24,
+          maxWidth: "55%",
+        }}
+      >
+        {/* Icon with ring */}
+        <div style={{ position: "relative", width: 72, height: 72 }}>
+          {/* Background ring */}
+          <div
+            style={{
+              position: "absolute",
+              top: -14,
+              left: -14,
+              width: 100,
+              height: 100,
+              borderRadius: "50%",
+              border: "2px solid #3ECF8E",
+              opacity: ringOpacity,
+              transform: `scale(${ringScale})`,
+            }}
+          />
+          {/* Rotating decorative shape */}
+          <div style={{ position: "absolute", top: -40, left: -40 }}>
+            <ShapeAnimation
+              shape="hexagon"
+              animation="rotate"
+              size={152}
+              color="transparent"
+              strokeColor="#3ECF8E"
+              strokeWidth={1}
+              speed={0.06}
+              opacity={0.1}
+            />
+          </div>
+          {/* Icon */}
+          <div
+            style={{
+              transform: `scale(${iconScale})`,
+              opacity: iconOpacity,
+              width: 72,
+              height: 72,
+              borderRadius: 16,
+              background: "rgba(62,207,142,0.1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              border: "1px solid rgba(62,207,142,0.2)",
+            }}
+          >
+            <Img src={iconUrl} style={{ width: 36, height: 36 }} />
+          </div>
+        </div>
+
+        {/* Title */}
+        <TextAnimation
+          createTimeline={({ textRef, tl, SplitText }) => {
+            const split = new SplitText(textRef.current, { type: "words" });
+            tl.from(split.words, {
+              opacity: 0,
+              y: 30,
+              stagger: 0.05,
+              duration: 0.5,
+              ease: "power3.out",
+            });
+            return tl;
+          }}
+          startFrom={10}
+          style={{
+            fontSize: 44,
+            fontWeight: 700,
+            color: "#FAFAFA",
+            lineHeight: 1.15,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          {title}
+        </TextAnimation>
+
+        {/* Green accent line */}
+        <div
+          style={{
+            width: `${lineScale * 80}px`,
+            height: 3,
+            background: "linear-gradient(90deg, #3ECF8E, transparent)",
+            borderRadius: 2,
+          }}
+        />
+
+        {/* Description */}
+        <TextAnimation
+          createTimeline={({ textRef, tl, SplitText }) => {
+            const split = new SplitText(textRef.current, { type: "words" });
+            tl.from(split.words, {
+              opacity: 0,
+              y: 12,
+              stagger: 0.02,
+              duration: 0.4,
+              ease: "power2.out",
+            });
+            return tl;
+          }}
+          startFrom={25}
+          style={{
+            fontSize: 20,
+            color: "rgba(250,250,250,0.55)",
+            fontWeight: 400,
+            lineHeight: 1.6,
+            maxWidth: 520,
+          }}
+        >
+          {description}
+        </TextAnimation>
+      </div>
+    </AbsoluteFill>
+  );
+};
