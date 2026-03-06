@@ -108,7 +108,7 @@ export const HeroScene: React.FC = () => {
           startFrom={50}
           style={{ fontSize: 22, color: "rgba(250,250,250,0.6)", fontWeight: 400, letterSpacing: "0.03em" }}
         >
-          Build in a weekend. Scale to millions.
+          The Postgres Development Platform
         </TextAnimation>
 
         {/* Sub tagline */}
@@ -127,7 +127,7 @@ export const HeroScene: React.FC = () => {
           startFrom={70}
           style={{ fontSize: 16, color: "#3ECF8E", fontWeight: 500, letterSpacing: "0.05em" }}
         >
-          The Open Source Firebase Alternative
+          From weekend projects to enterprise scale
         </TextAnimation>
       </div>
     </AbsoluteFill>

@@ -72,7 +72,7 @@ export const CTAScene: React.FC = () => {
             textAlign: "center",
           }}
         >
-          Start building today
+          Start Building Today
         </TextAnimation>
 
         {/* CTA Button */}
@@ -94,7 +94,7 @@ export const CTAScene: React.FC = () => {
               letterSpacing: "0.02em",
             }}
           >
-            Get Started Free →
+            Start Your Project →
           </div>
         </div>
 

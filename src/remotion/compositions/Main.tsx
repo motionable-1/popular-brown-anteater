@@ -49,7 +49,7 @@ const FEATURES = [
     index: 2,
   },
   {
-    iconUrl: "https://api.iconify.design/lucide/code.svg?color=%233ECF8E&width=36",
+    iconUrl: "https://api.iconify.design/lucide/zap.svg?color=%233ECF8E&width=36",
     title: "Edge Functions & AI Vectors",
     description:
       "Deploy serverless functions globally at the edge. Store and query vector embeddings for modern AI applications with pgvector.",

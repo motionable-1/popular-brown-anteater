@@ -6,6 +6,6 @@ export const composition = {
   component: Main,
   durationInFrames: 585,
   fps: 30,
-  width: 1280,
-  height: 720,
+  width: 1920,
+  height: 1080,
 };
