@@ -43,24 +43,39 @@ const FEATURES = [
       "https://api.iconify.design/lucide/database-zap.svg?color=%233ECF8E&width=36",
     title: "Postgres Database with Instant APIs",
     description:
-      "Full Postgres database with auto-generated REST and GraphQL APIs. Build faster with row-level security and real-time subscriptions out of the box.",
+      "Full Postgres with auto-generated REST and GraphQL APIs. Row-level security and realtime subscriptions out of the box.",
     index: 1,
+    bullets: [
+      "Auto-generated REST & GraphQL APIs",
+      "Row Level Security built-in",
+      "Realtime data subscriptions",
+    ],
   },
   {
     iconUrl:
       "https://api.iconify.design/lucide/shield.svg?color=%233ECF8E&width=36",
     title: "Built-in Auth & Realtime",
     description:
-      "Authentication with 20+ providers, magic links, and SSO. Realtime subscriptions that keep your app data perfectly in sync.",
+      "Enterprise-grade authentication with 20+ providers and SSO. Realtime subscriptions keep your UI perfectly in sync.",
     index: 2,
+    bullets: [
+      "20+ social & SSO providers",
+      "Multi-factor authentication",
+      "Live broadcast & presence",
+    ],
   },
   {
     iconUrl:
       "https://api.iconify.design/lucide/zap.svg?color=%233ECF8E&width=36",
     title: "Edge Functions & AI Vectors",
     description:
-      "Deploy serverless functions globally at the edge. Store and query vector embeddings for modern AI applications with pgvector.",
+      "Deploy serverless functions globally at the edge. Store and query vector embeddings for modern AI apps with pgvector.",
     index: 3,
+    bullets: [
+      "Global edge deployment",
+      "pgvector for AI embeddings",
+      "TypeScript & Deno runtime",
+    ],
   },
 ];
 
