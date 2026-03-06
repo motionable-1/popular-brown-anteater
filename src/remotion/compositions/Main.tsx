@@ -1,4 +1,4 @@
-import { AbsoluteFill, Artifact, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, Artifact, useCurrentFrame } from "remotion";
 import { loadFont as loadSpaceGrotesk } from "@remotion/google-fonts/SpaceGrotesk";
 import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
 import {
@@ -21,6 +21,10 @@ import { CTAScene } from "./scenes/CTAScene";
 const { fontFamily: headingFont } = loadSpaceGrotesk();
 const { fontFamily: bodyFont } = loadInter();
 
+// Background music
+const BG_MUSIC =
+  "https://v3b.fal.media/files/b/0a910fe1/mHH5dRE9Ws69CowZ-SMyB_music_generated.mp3";
+
 // Transition duration
 const T = 15;
 
@@ -35,21 +39,24 @@ const CTA_DUR = 110;
 // Feature data
 const FEATURES = [
   {
-    iconUrl: "https://api.iconify.design/lucide/database-zap.svg?color=%233ECF8E&width=36",
+    iconUrl:
+      "https://api.iconify.design/lucide/database-zap.svg?color=%233ECF8E&width=36",
     title: "Postgres Database with Instant APIs",
     description:
       "Full Postgres database with auto-generated REST and GraphQL APIs. Build faster with row-level security and real-time subscriptions out of the box.",
     index: 1,
   },
   {
-    iconUrl: "https://api.iconify.design/lucide/shield.svg?color=%233ECF8E&width=36",
+    iconUrl:
+      "https://api.iconify.design/lucide/shield.svg?color=%233ECF8E&width=36",
     title: "Built-in Auth & Realtime",
     description:
       "Authentication with 20+ providers, magic links, and SSO. Realtime subscriptions that keep your app data perfectly in sync.",
     index: 2,
   },
   {
-    iconUrl: "https://api.iconify.design/lucide/zap.svg?color=%233ECF8E&width=36",
+    iconUrl:
+      "https://api.iconify.design/lucide/zap.svg?color=%233ECF8E&width=36",
     title: "Edge Functions & AI Vectors",
     description:
       "Deploy serverless functions globally at the edge. Store and query vector embeddings for modern AI applications with pgvector.",
@@ -65,7 +72,12 @@ export const Main: React.FC = () => {
       {frame === 0 && (
         <Artifact content={Artifact.Thumbnail} filename="thumbnail.jpeg" />
       )}
-      <AbsoluteFill style={{ fontFamily: `${headingFont}, ${bodyFont}, sans-serif` }}>
+      <AbsoluteFill
+        style={{ fontFamily: `${headingFont}, ${bodyFont}, sans-serif` }}
+      >
+        {/* Background music - subtle volume */}
+        <Audio src={BG_MUSIC} volume={0.35} />
+
         {/* Persistent animated background */}
         <Background />
 
@@ -78,7 +90,10 @@ export const Main: React.FC = () => {
 
           <TransitionSeries.Transition
             presentation={blurDissolve()}
-            timing={springTiming({ config: { damping: 200 }, durationInFrames: T })}
+            timing={springTiming({
+              config: { damping: 200 },
+              durationInFrames: T,
+            })}
           />
 
           {/* Feature 1 - Postgres */}
@@ -88,7 +103,10 @@ export const Main: React.FC = () => {
 
           <TransitionSeries.Transition
             presentation={flashBlack()}
-            timing={springTiming({ config: { damping: 200 }, durationInFrames: T })}
+            timing={springTiming({
+              config: { damping: 200 },
+              durationInFrames: T,
+            })}
           />
 
           {/* Feature 2 - Auth */}
@@ -98,7 +116,10 @@ export const Main: React.FC = () => {
 
           <TransitionSeries.Transition
             presentation={flashBlack()}
-            timing={springTiming({ config: { damping: 200 }, durationInFrames: T })}
+            timing={springTiming({
+              config: { damping: 200 },
+              durationInFrames: T,
+            })}
           />
 
           {/* Feature 3 - Edge Functions */}
@@ -108,7 +129,10 @@ export const Main: React.FC = () => {
 
           <TransitionSeries.Transition
             presentation={maskReveal()}
-            timing={springTiming({ config: { damping: 200 }, durationInFrames: T })}
+            timing={springTiming({
+              config: { damping: 200 },
+              durationInFrames: T,
+            })}
           />
 
           {/* Social Proof */}
@@ -118,7 +142,10 @@ export const Main: React.FC = () => {
 
           <TransitionSeries.Transition
             presentation={blurDissolve()}
-            timing={springTiming({ config: { damping: 200 }, durationInFrames: T })}
+            timing={springTiming({
+              config: { damping: 200 },
+              durationInFrames: T,
+            })}
           />
 
           {/* CTA */}
