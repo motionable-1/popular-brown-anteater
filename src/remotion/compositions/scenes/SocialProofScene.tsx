@@ -23,8 +23,8 @@ const COMPANIES = [
     icon: "https://api.iconify.design/simple-icons/1password.svg?color=%23FAFAFA&width=36",
   },
   {
-    name: "PWC",
-    icon: "https://api.iconify.design/simple-icons/pwc.svg?color=%23FAFAFA&width=36",
+    name: "Notion",
+    icon: "https://api.iconify.design/simple-icons/notion.svg?color=%23FAFAFA&width=36",
   },
 ];
 
